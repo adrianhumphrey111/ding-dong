@@ -69,10 +69,12 @@ let handler = function (context) {
             .then(function (variables) {
                 console.log('-- start processing');
                 console.log('variables', JSON.stringify(variables));
-
+                let filename = uuid()
+                context.recordFile(filepath, 'wav', '#', 10000, 0, 'beep', '')
+                    .then( obj => console.log({obj}));
             })         
             .then(function () {
-                return loop(FlowProcess);
+                //return loop(FlowProcess);
             });
         
 };
