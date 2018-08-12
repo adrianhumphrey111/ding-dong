@@ -67,10 +67,9 @@ let handler = function (context) {
 
     context.onEvent('variables')
             .then(function (variables) {
-                log('-- start processing');
-                log('variables', JSON.stringify(variables));
-                return stepSetFailedVars()
-                    .then(stepGreeting);
+                console.log('-- start processing');
+                console.log('variables', JSON.stringify(variables));
+
             })         
             .then(function () {
                 return loop(FlowProcess);
