@@ -66,20 +66,16 @@ var stepSetFailedVars = function () {
 let handler = function (context) {
 
     context.onEvent('variables')
-        .then(function (vars) {
-            console.log('vars', vars);
-            return context.streamFile('beep');
-        })
-        .then(function (result) {
-            let filename = uuid.v4();
-            context.recordFile(filepath, 'wav', '#', 5000, 0, 'beep', '')
-                .then(stepRecognize(filename))
-            return context.setVariable('RECOGNITION_RESULT', 'I\'m your father, Luc');
-        })
-        .then(function (result) {
-            return context.end();
-        })
-        .fail(console.log);
+            .then(function (variables) {
+                log('-- start processing');
+                log('variables', JSON.stringify(variables));
+                return stepSetFailedVars()
+                    .then(stepGreeting);
+            })         
+            .then(function () {
+                return loop(FlowProcess);
+            });
+        
 };
 
 var agi = new AGIServer(handler, { debug: true });
