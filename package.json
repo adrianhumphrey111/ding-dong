@@ -15,6 +15,7 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
+    "@google-cloud/speech": "^2.0.0",
     "readable-stream": "*"
   },
   "devDependencies": {
